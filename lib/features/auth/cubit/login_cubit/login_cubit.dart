@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop/core/helper/my_navigator.dart';
+import 'package:shop/features/home/views/home_view.dart';
 
 import '../../data/repo/auth_repo.dart';
 import 'login_state.dart';
@@ -26,7 +28,6 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   void onLoginPressed() async {
-
     emit(LoginLoading());
 
     var response = await authRepo.login(
@@ -35,14 +36,15 @@ class LoginCubit extends Cubit<LoginState> {
     );
 
     response.fold(
-
           (error) {
         emit(LoginError(error: error));
       },
 
           (success) {
         emit(LoginSuccess());
+        MyNavigator.goTo(HomeView());
       },
     );
+    formKey.currentState?.validate();
   }
 }

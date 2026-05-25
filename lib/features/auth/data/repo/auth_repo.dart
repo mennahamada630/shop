@@ -5,71 +5,39 @@ import '../models/user_model.dart';
 
 class AuthRepo {
 
-  Dio dio = Dio();
+  Future<Either<String, UserModel>> login({required String email, required String password,}) async {
+    await Future.delayed(
+      const Duration(seconds: 2),
+    );
 
-  Future<Either<String, UserModel>> login({required String email, required String password}) async {
+    return Right(
 
-    try {
-      var response = await dio.post(
+      UserModel(
 
-        "YOUR_LOGIN_ENDPOINT",
-
-        data: {
-
-          "email": email,
-          "password": password,
-        },
-      );
-
-      UserModel userModel =
-      UserModel.fromJson(response.data);
-
-      return Right(userModel);
-
-    } on DioException catch(e){
-
-      return Left(
-        e.response?.data["message"] ??
-            "Something went wrong",
-      );
-    }
+        id: 1,
+        name: "Menna",
+        email: email,
+        phone: "01000000000",
+        token: "12345",
+      ),
+    );
   }
 
-  Future<Either<String, UserModel>> register({
+  Future<Either<String, UserModel>> register({required String name, required String email,
+    required String phone, required String password,}) async {
+    await Future.delayed(
+      const Duration(seconds: 2),
+    );
+    return Right(
 
-    required String name,
-    required String email,
-    required String phone,
-    required String password,
+      UserModel(
 
-  }) async {
-
-    try {
-
-      var response = await dio.post(
-
-        "YOUR_REGISTER_ENDPOINT",
-
-        data: {
-
-          "name": name,
-          "email": email,
-          "phone": phone,
-          "password": password,
-        },
-      );
-
-      UserModel userModel =
-      UserModel.fromJson(response.data);
-
-      return Right(userModel);
-
-    } on DioException catch(e){
-
-      return Left(
-        e.response?.data["message"] ??
-            "Something went wrong",
-      );
-    }
+        id: 1,
+        name: name,
+        email: email,
+        phone: phone,
+        token: "12345",
+      ),
+    );
   }
 }

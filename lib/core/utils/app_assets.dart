@@ -1,5 +1,5 @@
 abstract class AppAssets {
-  static const _assetBasePath = 'assets/';
+  static const _assetBasePath = 'assets/images/';
   static const String chooseProduct = '${_assetBasePath}choose_products.svg';
   static const String getYourOrder = '${_assetBasePath}get_your_order.svg';
   static const String makePayment = '${_assetBasePath}make_payment.svg';

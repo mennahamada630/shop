@@ -21,16 +21,11 @@ class OnboardingView extends StatelessWidget {
       create: (context) => OnboardingCubit(),
       child: BlocBuilder<OnboardingCubit, OnboardingState>(
         builder: (context, state) {
-
           var cubit = OnboardingCubit.get(context);
-
           return Scaffold(
-
             body: SafeArea(
               child: Column(
-
                 children: [
-
                   Align(
                     alignment: Alignment.topRight,
                     child: TextButton(
@@ -95,14 +90,11 @@ class OnboardingView extends StatelessWidget {
 
                         TextButton(
                           onPressed: () {
-
-                            if (cubit.currentIndex ==
-                                cubit.onboardingList.length - 1) {
-
+                            if (cubit.currentIndex == cubit.onboardingList.length - 1) {
                               MyNavigator.goTo(GetStartedView(),);
-
-                            } else {
-
+                            }
+                            else
+                            {
                               cubit.pageController.nextPage(
                                 duration:
                                 const Duration(milliseconds: 500),
@@ -111,8 +103,7 @@ class OnboardingView extends StatelessWidget {
                             }
                           },
                           child: Text(
-                            cubit.currentIndex ==
-                                cubit.onboardingList.length - 1
+                            cubit.currentIndex == cubit.onboardingList.length - 1
                                 ? "Get Started"
                                 : "Next",
                             style: TextStyle(

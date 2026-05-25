@@ -12,11 +12,8 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-
       bottomNavigationBar: BottomNavigationBar(
-
         currentIndex: 0,
-
         items: const [
 
           BottomNavigationBarItem(
@@ -37,30 +34,20 @@ class HomeView extends StatelessWidget {
       ),
 
       body: SafeArea(
-
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
-
           child: Column(
-
             crossAxisAlignment:
             CrossAxisAlignment.start,
-
             children: [
-
               SizedBox(height: 20.h),
-
               Row(
-
                 children: [
-
                   CircleAvatar(
                     radius: 25.r,
                     backgroundColor: AppColors.primaryPink,
                   ),
-
                   SizedBox(width: 10.w),
-
                   Text(
                     "Stylish",
                     style: TextStyle(
@@ -74,21 +61,14 @@ class HomeView extends StatelessWidget {
               SizedBox(height: 25.h),
 
               TextField(
-
                 decoration: InputDecoration(
-
                   hintText: "Search any product",
-
                   prefixIcon: const Icon(Icons.search),
-
                   filled: true,
-
                   fillColor: Colors.grey.shade100,
-
                   border: OutlineInputBorder(
                     borderRadius:
                     BorderRadius.circular(15.r),
-
                     borderSide: BorderSide.none,
                   ),
                 ),
@@ -109,23 +89,15 @@ class HomeView extends StatelessWidget {
               Expanded(
 
                 child: GridView.builder(
-
                   itemCount: 10,
-
                   gridDelegate:
                   SliverGridDelegateWithFixedCrossAxisCount(
-
                     crossAxisCount: 2,
-
                     crossAxisSpacing: 15.w,
-
                     mainAxisSpacing: 15.h,
-
                     childAspectRatio: .62,
                   ),
-
                   itemBuilder: (context, index) {
-
                     return const ProductItem();
                   },
                 ),

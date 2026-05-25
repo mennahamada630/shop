@@ -1,71 +1,57 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
+import '../../../../core/utils/app_assets.dart';
 import '../models/category_model.dart';
 import '../models/product_model.dart';
 
 class HomeRepo {
 
-  Dio dio = Dio();
+  Future<Either<String,List<CategoryModel>>> getCategories() async {
+    await Future.delayed(
+      const Duration(seconds: 1),
+    );
+    return Right(
+      [
+        CategoryModel(
+          image: AppAssets.beautyCategory,
+          title: "Beauty",
+        ),
 
-  Future<Either<String,List<CategoryModel>>>
-  getCategories() async {
+        CategoryModel(
+          image: AppAssets.fashionCategory,
+          title: "Fashion",
+        ),
 
-    try {
-
-      Response response = await dio.get(
-        "YOUR_CATEGORIES_ENDPOINT",
-      );
-
-      List data = response.data;
-
-      List<CategoryModel> categories =
-      data.map(
-            (e) =>
-            CategoryModel.fromJson(e),
-      ).toList();
-
-      return Right(categories);
-
-    } on DioException catch(e){
-
-      return Left(
-        e.response?.data['message'] ??
-            "Something went wrong",
-      );
-    }
+        CategoryModel(
+          image: AppAssets.kidsCategory,
+          title: "Kids",
+        ),
+      ],
+    );
   }
 
-  Future<Either<String,List<ProductModel>>>
-  getProducts() async {
+  Future<Either<String,List<ProductModel>>> getProducts() async {
 
-    try {
+    await Future.delayed(
+      const Duration(seconds: 1),
+    );
+    return Right(
+      [
+        ProductModel(
+          image:
+          "https://i.imgur.com/CGCyp1d.jpeg",
+          title: "Women Printed Kurta",
+          price: "150",
+        ),
 
-      Response response = await dio.get(
-        "YOUR_PRODUCTS_ENDPOINT",
-      );
-
-      List data = response.data;
-
-      List<ProductModel> products =
-      data.map(
-            (e) =>
-            ProductModel(
-              image: e['image'],
-              title: e['title'],
-              price:
-              e['price'].toString(),
-            ),
-      ).toList();
-
-      return Right(products);
-
-    } on DioException catch(e){
-
-      return Left(
-        e.response?.data['message'] ??
-            "Something went wrong",
-      );
-    }
+        ProductModel(
+          image:
+          "https://i.imgur.com/AkzWQuJ.jpeg",
+          title: "HRX Shoes",
+          price: "250",
+        ),
+      ],
+    );
   }
 }

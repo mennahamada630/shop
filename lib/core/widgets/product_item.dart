@@ -11,15 +11,10 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-
       padding: EdgeInsets.all(10.r),
-
       decoration: BoxDecoration(
-
         color: Colors.white,
-
         borderRadius: BorderRadius.circular(20.r),
-
         boxShadow: [
           BoxShadow(
             blurRadius: 5,
@@ -27,18 +22,12 @@ class ProductItem extends StatelessWidget {
           ),
         ],
       ),
-
       child: Column(
-
         crossAxisAlignment:
         CrossAxisAlignment.start,
-
         children: [
-
           Expanded(
-
             child: Container(
-
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius:

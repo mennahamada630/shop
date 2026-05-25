@@ -127,7 +127,7 @@ class RegisterView extends StatelessWidget {
 
                             TextButton(
                               onPressed: () => MyNavigator.goTo(LoginView()),
-                              child: const Text("Login"),
+                              child:  Text("Login"),
                             ),
                           ],
                         ),

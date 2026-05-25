@@ -85,7 +85,7 @@ class HomeView extends StatelessWidget {
             ),
 
             SizedBox(height: 25.h),
-            const FeaturedSection(
+            FeaturedSection(
               title: "Recommended",
             ),
 
@@ -94,7 +94,7 @@ class HomeView extends StatelessWidget {
             GridView.builder(
               shrinkWrap: true,
               physics:
-              const NeverScrollableScrollPhysics(),
+               NeverScrollableScrollPhysics(),
               itemCount:
               cubit.products.length,
               gridDelegate:

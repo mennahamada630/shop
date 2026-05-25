@@ -23,12 +23,6 @@ class GetStartedView extends StatelessWidget {
 
         children: [
           SvgWrappers(svgPath: AppAssets.getStartedWallpaper),
-
-          // Image.asset(
-          //   AppAssets.getStarted,
-          //   fit: BoxFit.cover,
-          // ),
-
           Container(
             color: Colors.black.withOpacity(.4),
           ),

@@ -20,7 +20,7 @@ class _SplashViewState extends State<SplashView> {
     super.initState();
 
     Future.delayed(
-      const Duration(seconds: 3),
+       Duration(seconds: 3),
           ()=> MyNavigator.goTo ( OnboardingView(),
           type: NavigatorType.pushAndRemoveUntil),
 

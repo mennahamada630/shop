@@ -97,7 +97,7 @@ class OnboardingView extends StatelessWidget {
                             {
                               cubit.pageController.nextPage(
                                 duration:
-                                const Duration(milliseconds: 500),
+                                 Duration(milliseconds: 500),
                                 curve: Curves.easeInOut,
                               );
                             }

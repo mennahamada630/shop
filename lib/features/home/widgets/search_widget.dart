@@ -15,20 +15,22 @@ class SearchWidget extends StatelessWidget {
 
         hintText: "Search any Product..",
 
-        prefixIcon: const Icon(Icons.search),
+        prefixIcon:  Icon(Icons.search),
 
-        suffixIcon: const Icon(Icons.mic_none),
+        suffixIcon:  Icon(Icons.mic_none),
 
         filled: true,
 
-        fillColor: AppColors.lightGrey,
+        fillColor: AppColors.background,
 
         border: OutlineInputBorder(
 
           borderRadius:
           BorderRadius.circular(15.r),
 
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(
+            color: AppColors.lightGrey
+          ),
         ),
 
         enabledBorder: OutlineInputBorder(
@@ -36,7 +38,9 @@ class SearchWidget extends StatelessWidget {
           borderRadius:
           BorderRadius.circular(15.r),
 
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(
+            color: AppColors.lightGrey
+          ),
         ),
       ),
     );

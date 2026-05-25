@@ -17,7 +17,7 @@ class AuthRepo {
         id: 1,
         name: "Menna",
         email: email,
-        phone: "01000000000",
+        phone: "0100",
         token: "12345",
       ),
     );

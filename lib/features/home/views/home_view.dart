@@ -1,9 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shop/core/widgets/custom_app_bar.dart';
+import 'package:shop/features/home/cubit/home_cubit.dart';
+import 'package:shop/features/home/widgets/banner_widgets.dart';
+import 'package:shop/features/home/widgets/featured_section.dart';
 
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/product_item.dart';
+import '../cubit/home_state.dart';
+import '../widgets/category_item.dart';
+import '../widgets/recommended_item.dart';
+import '../widgets/search_widget.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -11,101 +20,106 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        items: const [
-
+    return BlocProvider(
+      create: (context){
+        HomeCubit cubit = HomeCubit();
+        cubit.getCategories();
+        cubit.getProducts();
+        return cubit;
+      },
+      child: BlocBuilder<HomeCubit,HomeState>(
+        builder: (context,state) {
+          var cubit = HomeCubit.get(context);
+          return Scaffold(
+          bottomNavigationBar: BottomNavigationBar(
+          currentIndex: 0,
+          items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
+          icon: Icon(Icons.home),
+          label: "Home",
           ),
 
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            label: "Cart",
+          icon: Icon(Icons.shopping_cart_outlined),
+          label: "Cart",
           ),
 
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: "Profile",
+          icon: Icon(Icons.person_outline),
+          label: "Profile",
           ),
-        ],
-      ),
+          ],
+          ),
+          appBar: CustomAppBar(title: 'Stylish'),
 
-      body: SafeArea(
-        child: Padding(
+          body: SafeArea(
+          child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child:SingleChildScrollView(
           child: Column(
-            crossAxisAlignment:
-            CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 20.h),
-              Row(
-                children: [
-                  CircleAvatar(
-                    radius: 25.r,
-                    backgroundColor: AppColors.primaryPink,
-                  ),
-                  SizedBox(width: 10.w),
-                  Text(
-                    "Stylish",
-                    style: TextStyle(
-                      fontSize: 22.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+          crossAxisAlignment:
+          CrossAxisAlignment.start,
+          children: [
+            SearchWidget(),
+          SizedBox(height: 20.h),
+          BannerWidget(),
+          SizedBox(height: 25.h),
+          FeaturedSection(title: 'All Featured'),
+          SizedBox(height: 15,),
+            SizedBox(
+              height: 100.h,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index){
+                  return CategoryItem(
+                    model:
+                    cubit.categories[index],
+                  );
+                },
+                separatorBuilder:
+                    (_, __) =>
+                    SizedBox(width: 15.w),
+                itemCount:
+                cubit.categories.length,
+              ),
+            ),
+
+            SizedBox(height: 25.h),
+            const FeaturedSection(
+              title: "Recommended",
+            ),
+
+            SizedBox(height: 15.h),
+
+            GridView.builder(
+              shrinkWrap: true,
+              physics:
+              const NeverScrollableScrollPhysics(),
+              itemCount:
+              cubit.products.length,
+              gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 15.h,
+                crossAxisSpacing: 15.w,
+                childAspectRatio: .62,
               ),
 
-              SizedBox(height: 25.h),
-
-              TextField(
-                decoration: InputDecoration(
-                  hintText: "Search any product",
-                  prefixIcon: const Icon(Icons.search),
-                  filled: true,
-                  fillColor: Colors.grey.shade100,
-                  border: OutlineInputBorder(
-                    borderRadius:
-                    BorderRadius.circular(15.r),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 25.h),
-
-              Text(
-                "Recommended",
-                style: TextStyle(
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-
-              SizedBox(height: 20.h),
-
-              Expanded(
-
-                child: GridView.builder(
-                  itemCount: 10,
-                  gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 15.w,
-                    mainAxisSpacing: 15.h,
-                    childAspectRatio: .62,
-                  ),
-                  itemBuilder: (context, index) {
-                    return const ProductItem();
-                  },
-                ),
-              ),
-            ],
+              itemBuilder: (context, index){
+                return RecommendedItem(
+                  model:
+                  cubit.products[index],
+                );
+              },
+            ),
+          ],
           ),
-        ),
-      ),
+          ),
+          ),
+          )
+          );
+        }),
     );
+
   }
 }

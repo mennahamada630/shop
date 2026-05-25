@@ -15,4 +15,5 @@ abstract class AppAssets {
   static const String womenCasualWear = '${_assetBasePath}women_casual_wear.png';
   static const String menJacket = '${_assetBasePath}men_jacket.png';
   static const String menShirt = '${_assetBasePath}men_shirt.png';
+  static const String beauty = '${_assetBasePath}beauty.png';
 }
